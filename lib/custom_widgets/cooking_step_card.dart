@@ -81,6 +81,7 @@ class StepCard extends StatelessWidget {
                         itemCount: equipmentsImageUrl.length,
                         itemBuilder: (context, index) {
                           return ImageCard(
+                            color: Colors.black,
                             imageUrl: equipmentsImageUrl[index].image,
                             name: equipmentsImageUrl[index].name,
                           );
@@ -110,6 +111,7 @@ class StepCard extends StatelessWidget {
                         itemCount: ingredientsImageUrl.length,
                         itemBuilder: (context, index) {
                           return ImageCard(
+                              color: Colors.black,
                               imageUrl: ingredientsImageUrl[index].image,
                               name: ingredientsImageUrl[index].name);
                         },

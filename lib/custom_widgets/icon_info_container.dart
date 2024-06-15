@@ -13,13 +13,15 @@ class InfoContainerWithIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 58,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           icon,
-          Text(data),
+          Text(
+            data,
+            maxLines: 1,
+          ),
         ],
       ),
     );

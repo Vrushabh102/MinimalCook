@@ -7,6 +7,7 @@ import 'package:food_suggester/models/auto_complete_dishes.dart';
 import 'package:food_suggester/models/cooking_steps_model.dart';
 import 'package:food_suggester/models/food_item_model.dart';
 import 'package:food_suggester/models/recipe_information_model.dart';
+import 'package:food_suggester/models/recipes_by_ingredients_model.dart';
 import 'package:http/http.dart' as http;
 
 class RecipeServices {
@@ -39,14 +40,13 @@ class RecipeServices {
     }
   }
 
-
   Future<List<FoodItemModel>> getFoodItems(String food) async {
-  const getRecipesBaseUri = 'https://api.spoonacular.com/recipes/complexSearch';
+    const getRecipesBaseUri =
+        'https://api.spoonacular.com/recipes/complexSearch';
     log('getfooditem called');
     log('food $food');
     final response = await http.get(
-      Uri.parse(
-          '$getRecipesBaseUri?apiKey=$apiKey&query=$food&number=10'),
+      Uri.parse('$getRecipesBaseUri?apiKey=$apiKey&query=$food&number=20'),
       headers: {'Content-Type': 'application/json'},
     );
 
@@ -69,7 +69,6 @@ class RecipeServices {
       return [];
     }
   }
-
 
   Future<String> getSummaryById(int id) async {
     final baseUri =
@@ -147,131 +146,26 @@ class RecipeServices {
       return [];
     }
   }
-}
 
-// [
-//     {
-//         "name": "",
-//         "steps": [
-//             { json
-//                 "number": 1,
-//                 "step": "Rinse the beans thoroughly and place them in a 7-quart slow cooker along with the water, onion, garlic, and bay leaf. Cover and cook on LOW for about 8 hours, or until the beans are nice and tender.",
-//                 "ingredients": [
-//                     {
-//                         "id": 2004,
-//                         "name": "bay leaves",
-//                         "localizedName": "bay leaves",
-//                         "image": "https://spoonacular.com/cdn/ingredients_100x100/bay-leaves.jpg"
-//                     },
-//                     {
-//                         "id": 11215,
-//                         "name": "garlic",
-//                         "localizedName": "garlic",
-//                         "image": "https://spoonacular.com/cdn/ingredients_100x100/garlic.png"
-//                     },
-//                     {
-//                         "id": 0,
-//                         "name": "beans",
-//                         "localizedName": "beans",
-//                         "image": "https://spoonacular.com/cdn/ingredients_100x100/kidney-beans.jpg"
-//                     },
-//                     {
-//                         "id": 11282,
-//                         "name": "onion",
-//                         "localizedName": "onion",
-//                         "image": "https://spoonacular.com/cdn/ingredients_100x100/brown-onion.png"
-//                     },
-//                     {
-//                         "id": 14412,
-//                         "name": "water",
-//                         "localizedName": "water",
-//                         "image": "https://spoonacular.com/cdn/ingredients_100x100/water.png"
-//                     }
-//                 ],
-//                 "equipment": [
-//                     {
-//                         "id": 404718,
-//                         "name": "slow cooker",
-//                         "localizedName": "slow cooker",
-//                         "image": "https://spoonacular.com/cdn/equipment_100x100/slow-cooker.jpg"
-//                     }
-//                 ],
-//                 "length": {
-//                     "number": 480,
-//                     "unit": "minutes"
-//                 }
-//             },
-//             {
-//                 "number": 2,
-//                 "step": "Remove the bay leaf. Using a handheld immersion blender, puree the remaining ingredients to the desired texture.",
-//                 "ingredients": [
-//                     {
-//                         "id": 2004,
-//                         "name": "bay leaves",
-//                         "localizedName": "bay leaves",
-//                         "image": "https://spoonacular.com/cdn/ingredients_100x100/bay-leaves.jpg"
-//                     }
-//                 ],
-//                 "equipment": [
-//                     {
-//                         "id": 404776,
-//                         "name": "immersion blender",
-//                         "localizedName": "immersion blender",
-//                         "image": "https://spoonacular.com/cdn/equipment_100x100/immersion-blender.png"
-//                     }
-//                 ]
-//             },
-//             {
-//                 "number": 3,
-//                 "step": "Add the salt to taste.Ladle the soup into bowls.",
-//                 "ingredients": [
-//                     {
-//                         "id": 2047,
-//                         "name": "salt",
-//                         "localizedName": "salt",
-//                         "image": "https://spoonacular.com/cdn/ingredients_100x100/salt.jpg"
-//                     },
-//                     {
-//                         "id": 0,
-//                         "name": "soup",
-//                         "localizedName": "soup",
-//                         "image": ""
-//                     }
-//                 ],
-//                 "equipment": [
-//                     {
-//                         "id": 404783,
-//                         "name": "bowl",
-//                         "localizedName": "bowl",
-//                         "image": "https://spoonacular.com/cdn/equipment_100x100/bowl.jpg"
-//                     },
-//                     {
-//                         "id": 404630,
-//                         "name": "ladle",
-//                         "localizedName": "ladle",
-//                         "image": "https://spoonacular.com/cdn/equipment_100x100/ladle.jpg"
-//                     }
-//                 ]
-//             },
-//             {
-//                 "number": 4,
-//                 "step": "Drizzle with the olive oil, sprinkle with rosemary, and serve.",
-//                 "ingredients": [
-//                     {
-//                         "id": 4053,
-//                         "name": "olive oil",
-//                         "localizedName": "olive oil",
-//                         "image": "https://spoonacular.com/cdn/ingredients_100x100/olive-oil.jpg"
-//                     },
-//                     {
-//                         "id": 2036,
-//                         "name": "rosemary",
-//                         "localizedName": "rosemary",
-//                         "image": "https://spoonacular.com/cdn/ingredients_100x100/rosemary.jpg"
-//                     }
-//                 ],
-//                 "equipment": []
-//             }
-//         ]
-//     }
-// ]
+  Future<List<RecipesByIngredientsModel>> getRecipesbyIngredients(
+      String ingredients) async {
+    final response = await http.get(
+        Uri.parse(
+            'https://api.spoonacular.com/recipes/findByIngredients?apiKey=$apiKey&ingredients=$ingredients&ranking=2&number=10'),
+        headers: {
+          'Content-Type': 'application/json',
+        });
+
+    if (response.statusCode == 200) {
+      log(response.body);
+      final result = jsonDecode(response.body) as List;
+      final listOfRecipes =
+          result.map((e) => RecipesByIngredientsModel.fromMap(e)).toList();
+      return listOfRecipes;
+    } else {
+      log('some error');
+      log('${response.statusCode}');
+      return [];
+    }
+  }
+}

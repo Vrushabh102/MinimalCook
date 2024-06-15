@@ -4,11 +4,12 @@ Widget foodItemBox(
     BuildContext context, String imageUrl, String title, int id) {
   return Container(
     decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(
-        20,
-      ),
-      color: Colors.blueGrey,
-    ),
+        borderRadius: BorderRadius.circular(
+          20,
+        ),
+        color: Theme.of(context).brightness == Brightness.light
+            ? Colors.white
+            : Colors.grey[800]),
     child: Column(
       children: [
         ClipRRect(
