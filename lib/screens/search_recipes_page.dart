@@ -146,7 +146,7 @@ class _RecipesPageState extends State<RecipesPage> {
               ),
               (showFoodItems)
                   ? FutureBuilder(
-                      future: RecipeServices().getFoodItems(controller.text),
+                      future: RecipeServices().getFoodItems(controller.text                      ),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {

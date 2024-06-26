@@ -53,7 +53,6 @@ class _SuggestedRecipesState extends State<SuggestedRecipes> {
                 child: GridView.builder(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    // childAspectRatio: 3 / 2,
                     mainAxisExtent: 256,
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 0,
@@ -67,7 +66,9 @@ class _SuggestedRecipesState extends State<SuggestedRecipes> {
                           MaterialPageRoute(
                             builder: (context) => ShowRecipeInfo(
                                 model: ingredients[index],
-                                showMissedIngredients: true,
+                                showMissedIngredients:
+                                    ingredients[index].missedIngredientCount !=
+                                        0,
                                 imageUrl: ingredients[index].image,
                                 title: ingredients[index].title,
                                 id: ingredients[index].id),

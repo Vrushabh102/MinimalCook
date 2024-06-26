@@ -28,6 +28,7 @@ class ShowRecipeInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log("showmissing ingredients " + showMissedIngredients.toString());
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -214,11 +215,26 @@ class ShowRecipeInfo extends StatelessWidget {
               ),
 
               showMissedIngredients
+                  ? Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 15,
+                      ),
+                      alignment: Alignment.centerLeft,
+                      child: const Text(
+                        'Missing Ingredients',
+                        style: TextStyle(
+                            fontSize: 21, fontWeight: FontWeight.bold),
+                      ),
+                    )
+                  : Container(),
+
+              showMissedIngredients
                   ? ConstrainedBox(
                       constraints: BoxConstraints(
                         maxHeight: height * 0.16,
                       ),
                       child: ListView.builder(
+                        padding: EdgeInsets.only(left: 10),
                         scrollDirection: Axis.horizontal,
                         itemCount: model!.missingIngredients.length,
                         itemBuilder: (context, index) {

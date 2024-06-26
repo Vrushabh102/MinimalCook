@@ -3,8 +3,6 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:food_suggester/custom_widgets/show_shackbar.dart';
 import 'package:food_suggester/models/auto_complete_dishes.dart';
 import 'package:food_suggester/models/cooking_steps_model.dart';
 import 'package:food_suggester/models/food_item_model.dart';
@@ -13,14 +11,13 @@ import 'package:food_suggester/models/recipes_by_ingredients_model.dart';
 import 'package:http/http.dart' as http;
 
 class RecipeServices {
-  final apiKey = '193a7e93c26742828a3c7a811048501b';
+  final apiKey = 'c63d9b11aad64019ac7dd6ddbc1e0e3c';
   final autoCompleteBaseUri =
       'https://api.spoonacular.com/recipes/autocomplete';
 
   // auto complete recipe search
   // this function will get called every time user types something
-  Future<List<AutoCompleteDishesModel>> autoComplete(
-      String dish) async {
+  Future<List<AutoCompleteDishesModel>> autoComplete(String dish) async {
     try {
       log('fun called');
       final response = await http.get(
@@ -49,8 +46,7 @@ class RecipeServices {
     }
   }
 
-  Future<List<FoodItemModel>> getFoodItems(
-      String food) async {
+  Future<List<FoodItemModel>> getFoodItems(String food) async {
     try {
       const getRecipesBaseUri =
           'https://api.spoonacular.com/recipes/complexSearch';
@@ -86,7 +82,9 @@ class RecipeServices {
     }
   }
 
-  Future<String> getSummaryById(int id, ) async {
+  Future<String> getSummaryById(
+    int id,
+  ) async {
     try {
       final baseUri =
           'https://api.spoonacular.com/recipes/${id.toString()}/summary?apiKey=$apiKey';
@@ -113,7 +111,8 @@ class RecipeServices {
   }
 
   Future<RecipeInformationModel?> getRecipeInformation(
-      int id, ) async {
+    int id,
+  ) async {
     try {
       final baseUri =
           'https://api.spoonacular.com/recipes/${id.toString()}/information/?apiKey=$apiKey';
@@ -140,7 +139,9 @@ class RecipeServices {
     }
   }
 
-  Future<Uint8List?> getImage(int id, ) async {
+  Future<Uint8List?> getImage(
+    int id,
+  ) async {
     try {
       final baseUri =
           'https://api.spoonacular.com/recipes/${id.toString()}/ingredientWidget.png?apiKey=$apiKey&measure=metric';
@@ -160,7 +161,8 @@ class RecipeServices {
   }
 
   Future<List<CookingStepsModel>> getCookingSetps(
-      int id, ) async {
+    int id,
+  ) async {
     try {
       final baseUri =
           'https://api.spoonacular.com/recipes/${id.toString()}/analyzedInstructions?apiKey=$apiKey&stepBreakdown=true';
